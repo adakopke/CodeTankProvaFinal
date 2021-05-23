@@ -114,7 +114,7 @@ public class CadastroUsuarioArray implements CadastroUsuarios {
             }
         }
 
-        //Trecho está aqui apenas para listar o array depois de chamar o método para conferir o resultado
+        //Trecho está aqui apenas para listar o array depois de chamar o método para conferir o resultado.
         for (int i = 0; i < this.contador; i++) {
             System.out.println(usuarios[i]);
         }
