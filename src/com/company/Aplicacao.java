@@ -9,14 +9,14 @@ public class Aplicacao {
 
         //Carga inicial para teste
         CadastroUsuarioArray cadastros = new CadastroUsuarioArray();
-        cadastros.adicionar(new Usuario("adakopke", "123456", "Anderson Kopke", TipoUsuarioEnum.USER ));
-        cadastros.adicionar(new Usuario("pepe","123456", "Penelope Kopke", TipoUsuarioEnum.USER ));
-        cadastros.adicionar(new Usuario("chlote","123456", "Charlotte Kopke", TipoUsuarioEnum.ADMIN ));
-        cadastros.adicionar(new Usuario("chlote2","123456", "Charlotte Kopke", TipoUsuarioEnum.USER ));
+        cadastros.adicionar(new Admin("adakopke", "123456", "Anderson Kopke"));
+        cadastros.adicionar(new Usuario("pepe","123456", "Penelope Kopke"));
+        cadastros.adicionar(new Usuario("chlote","123456", "Charlotte Kopke"));
+        cadastros.adicionar(new Usuario("chlote2","123456", "Charlotte Kopke"));
 
 
         //Cadastro adicional para disparar expansão do array
-        cadastros.adicionar(new Usuario("chlote3","123456", "Charlotte Kopke", TipoUsuarioEnum.USER ));
+        cadastros.adicionar(new Usuario("chlote3","123456", "Charlotte Kopke"));
 
 
         //teste busca com sucesso

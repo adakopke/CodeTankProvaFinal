@@ -95,17 +95,14 @@ public class CadastroUsuarioArray implements CadastroUsuarios {
                 }
 
                 if (i < (this.contador)) {
-                    this.usuarios[i].setTipoUsuario(this.usuarios[i + 1].getTipoUsuario());
                     this.usuarios[i].setLogin(this.usuarios[i + 1].getLogin());
                     this.usuarios[i].setNome(this.usuarios[i + 1].getNome());
                     this.usuarios[i].setSenha(this.usuarios[i + 1].getSenha());
-                    this.usuarios[i + 1].setTipoUsuario(TipoUsuarioEnum.NULL);
                     this.usuarios[i + 1].setLogin("null");
                     this.usuarios[i + 1].setSenha("null");
                     this.usuarios[i + 1].setNome("null");
 
                 } else {
-                    this.usuarios[i].setTipoUsuario(TipoUsuarioEnum.NULL);
                     this.usuarios[i].setLogin("null");
                     this.usuarios[i].setSenha("null");
                     this.usuarios[i].setNome("null");
