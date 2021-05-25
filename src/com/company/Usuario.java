@@ -35,7 +35,6 @@ public class Usuario {
         this.senha = senha;
     }
 
-
     public String getNome() {
         return nome;
     }
@@ -43,7 +42,6 @@ public class Usuario {
     public void setNome(String nome) {
         this.nome = nome;
     }
-
 
     @Override
     public String toString() {

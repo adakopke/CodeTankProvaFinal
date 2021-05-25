@@ -10,34 +10,32 @@ public class Aplicacao {
         //Carga inicial para teste
         CadastroUsuarioArray cadastros = new CadastroUsuarioArray();
         cadastros.adicionar(new Admin("adakopke", "123456", "Anderson Kopke"));
-        cadastros.adicionar(new Usuario("pepe","123456", "Penelope Kopke"));
-        cadastros.adicionar(new Usuario("chlote","123456", "Charlotte Kopke"));
-        cadastros.adicionar(new Usuario("chlote2","123456", "Charlotte Kopke"));
+        cadastros.adicionar(new Usuario("pepe", "123456", "Penelope Kopke"));
+        cadastros.adicionar(new Usuario("Zelote2", "123456", "Zelotte Kopke"));
+        cadastros.adicionar(new Usuario("chlote", "123456", "Charlotte Kopke"));
 
 
-        //Cadastro adicional para disparar expansão do array
-        cadastros.adicionar(new Usuario("chlote3","123456", "Charlotte Kopke"));
 
+        //teste busca com erro
+        cadastros.buscar("chlote3");
+        System.out.println();
 
         //teste busca com sucesso
-        // cadastros.buscar("chlote3");
-
-       //teste de busca com falha
-       // cadastros.buscar("pow");
+        cadastros.buscar("pepe");
+        System.out.println();
 
         //Teste remover com sucesso
-        cadastros.remover("chlote2");
+       // cadastros.remover("chlote");
+        System.out.println("\n\n\n");
 
-       //Teste remover com erro
-        //cadastros.remover("pow");
+        //Teste remover admin
+       // cadastros.remover("adakopke");
 
+        //Teste listar todos
 
+        Usuario[] user = cadastros.getUsuarios();
 
-
-
-
-
-
+        cadastros.listarTodos(user[0]);
 
     }
 }

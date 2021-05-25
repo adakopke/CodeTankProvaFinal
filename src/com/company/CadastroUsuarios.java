@@ -8,6 +8,6 @@ public interface CadastroUsuarios {
 
     void remover(String usuario) throws CadastroUsuariosException;
 
-    void listarTodos(String usuario);
+    void listarTodos(Usuario usuario);
 
 }

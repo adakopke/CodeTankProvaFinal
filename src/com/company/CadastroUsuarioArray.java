@@ -1,14 +1,19 @@
 package com.company;
 
+import java.util.Arrays;
 import java.util.Scanner;
 
 public class CadastroUsuarioArray implements CadastroUsuarios {
-    int loginfound = 0;
+
+    private int loginfound = 0;
     private Usuario[] usuarios;
     private int contador;
+    private String adminLogin = "adakopke";
+
+
 
     public CadastroUsuarioArray() {
-        this.usuarios = new Usuario[4];
+        this.usuarios = new Usuario[2];
         this.contador = 0;
 
     }
@@ -33,21 +38,16 @@ public class CadastroUsuarioArray implements CadastroUsuarios {
     public void adicionar(Usuario usuario) {
         //System.err.println("Limite de cadastro atingido!");
         if (this.contador == this.usuarios.length) {
-            Scanner teclado = new Scanner(System.in);
-            System.out.println("Cadastro cheio, deseja expandir (S/N)");
-            String resposta = (teclado.nextLine());
-            if (resposta.equalsIgnoreCase("S")){
-                this.expandir();
-            } else {
-                System.err.println("Operação abortada");
-            }
+            this.expandir();
+            System.out.println("novo tamanho do array: " + this.usuarios.length);
         }
+
         if (this.contador < this.usuarios.length) {
             this.usuarios[this.contador] = usuario;
             this.contador++;
         }
-    }
 
+    }
 
 
     private void expandir() {
@@ -67,11 +67,7 @@ public class CadastroUsuarioArray implements CadastroUsuarios {
 
 
     public void buscar(String usuario) {
-
-        if (this.contador == 0) {
-            System.out.println("Nenhum registro encontrado");
-            return;
-        }
+        loginfound = 0;
         for (int i = 0; i < this.contador; i++) {
             if (this.usuarios[i].getLogin().equalsIgnoreCase(usuario)) {
                 System.out.println("Seja bem-vindo: " + usuarios[i].getNome());
@@ -80,14 +76,18 @@ public class CadastroUsuarioArray implements CadastroUsuarios {
 
         }
         if (loginfound == 0) {
-            System.err.println("Não autorizado");
+            System.out.println(usuario + " não autorizado");
         }
 
     }
 
 
     public void remover(String usuario) throws CadastroUsuariosException {
+        int escolherNovoAdmin = 0;
         validarExclusao(usuario);
+        if (usuario.equals(adminLogin)) {
+            escolherNovoAdmin = 1;
+        }
         for (int i = 0; i < this.contador; i++) {
             if (this.usuarios[i].getLogin().equalsIgnoreCase(usuario) || this.usuarios[i].getLogin().equalsIgnoreCase("null")) {
                 if (this.usuarios[i].getLogin().equalsIgnoreCase(usuario)) {
@@ -110,10 +110,12 @@ public class CadastroUsuarioArray implements CadastroUsuarios {
                 }
             }
         }
-
+        if (escolherNovoAdmin == 1) {
+            validarAdmin();
+        }
         //Trecho está aqui apenas para listar o array depois de chamar o método para conferir o resultado.
         for (int i = 0; i < this.contador; i++) {
-            System.out.println(usuarios[i]);
+            System.out.println(this.usuarios[i].getLogin() + " " + this.usuarios[i].getClass());
         }
 
     }
@@ -128,15 +130,52 @@ public class CadastroUsuarioArray implements CadastroUsuarios {
 
         if (loginfound == 0) {
             throw new ExclusaoUsuarioInexistenteException();
-       }
+        }
+    }
+
+    private void validarAdmin() {
+        Scanner teclado = new Scanner(System.in);
+        System.out.println("Escolha um novo administrador para o sistema");
+        for (int j = 0; j < this.contador; j++) {
+            System.out.println("ID: " + j + " -> " + this.usuarios[j].getLogin());
+        }
+        System.out.println("Digite o ID do usuário que será o novo admin");
+        int id = Integer.parseInt(teclado.nextLine());
+        String login = this.usuarios[id].getLogin();
+        String senha = this.usuarios[id].getSenha();
+        String nome = this.usuarios[id].getNome();
+        this.usuarios[id] = new Admin(login, senha, nome);
+        System.out.println(this.usuarios[id].getClass() + " " + this.usuarios[id].getLogin());
+        adminLogin = this.usuarios[id].getLogin();
+
+
     }
 
 
-    public void listarTodos(String usuario) {
 
-    }
+public void listarTodos(Usuario usuario){
+        if (usuario instanceof Admin) {
+            String[] ordenar = new String[this.contador];
+            for (int i = 0; i < this.usuarios.length; i++ ) {
+                ordenar[i] = "\n" +
+                              " Nome: " + this.usuarios[i].getNome() + "\n" +
+                             " Login: " + this.usuarios[i].getLogin() + "\n" +
+                             " Senha:  " + this.usuarios[i].getSenha() + "\n" +
+                             "\n";
+            }
+
+            Arrays.sort(ordenar);
+            System.out.println(Arrays.toString(ordenar));
 
 
-}
+        } else {
+            System.out.println("Operação não autorizada");
+        }
+
+
+        }
+
+
+        }
 
 
